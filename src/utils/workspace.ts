@@ -1,8 +1,8 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-const FOLDERS = ["cache"] as const;
+const FOLDERS = ["assets", "bin"] as const;
 type WorkspaceFolders = typeof FOLDERS[number];
 
 export class Workspace {
@@ -23,7 +23,8 @@ export class Workspace {
 
     // Directories to be created for the workspace
     await Promise.all([
-      mkdir(Workspace.dirs.cache, { recursive: true })
+      mkdir(Workspace.dirs.assets, { recursive: true }),
+      mkdir(Workspace.dirs.bin, { recursive: true })
     ]);
 
     Workspace.instance = new Workspace();
@@ -35,21 +36,7 @@ export class Workspace {
     return writeFile(filePath, data);
   }
 
-  // Cache management methods
-  get cache () {
-    return {
-      write: async (filename: string, data: string) => {
-        const filePath = join(Workspace.dirs.cache, filename);
-        return writeFile(filePath, data);
-      },
-      read: async (filename: string) => {
-        const filePath = join(Workspace.dirs.cache, filename);
-        return readFile(filePath, "utf-8").catch(() => null);
-      },
-      delete: async (filename: string) => {
-        const filePath = join(Workspace.dirs.cache, filename);
-        return rm(filePath, { force: true });
-      }
-    };
+  static getPath (folder: WorkspaceFolders, filename: string) {
+    return folder ? join(Workspace.dirs[folder], filename) : join(Workspace.path, filename);
   }
 }

@@ -9,6 +9,8 @@ import { randomUUID } from "node:crypto";
 import { Workspace } from "./workspace.ts";
 import pkg from "../../package.json" with { type: "json" };
 
+export const isPkg = process?.pkg;
+
 export const APP = {
   name: pkg.name,
   version: pkg.version,

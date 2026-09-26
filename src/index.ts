@@ -1,6 +1,6 @@
 import { defineCommand, runMain } from "citty";
 import { consola } from "consola";
-import { APP, checkForUpdates, runtime } from "./utils/app.ts";
+import { APP, checkForUpdates, isPkg, runtime } from "./utils/app.ts";
 import { runHttp } from "./services/http.ts";
 import { startCloudflared } from "./lib/cloudflared.ts";
 import { twitchAuth } from "./services/twitch.ts";
@@ -34,7 +34,7 @@ const main = defineCommand({
     runtime.dev = args.dev === true;
     consola.info(`Running ${APP.name} v${APP.version}`);
     try {
-      await Workspace.setup(APP.name);
+      if (isPkg) await Workspace.setup(APP.name);
       await createTray();
       if (!runtime.dev) {
         const { isUpdateAvailable, updateApp } = await checkForUpdates();

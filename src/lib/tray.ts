@@ -2,20 +2,23 @@ import { platform } from "node:process";
 import { join } from "node:path";
 import { copyFile } from "node:fs/promises";
 import consola from "consola";
+import SysTrayModule from "systray2";
+import koffi from "koffi";
 import { Workspace } from "../utils/workspace.ts";
 import metadata from "../utils/metadata.ts";
 import { toggleCmd } from "../utils/cmd.ts";
-import SysTrayModule from "systray2";
 import { Icon, Menu, NotifyIcon } from "not-the-systray";
-import koffi from "koffi";
+import { isPkg } from "../utils/app.ts";
 
-const iconPath = platform === "win32" ? "assets/lolscoreboard.ico" : "assets/lolscoreboard.png";
-const pkg = process?.pkg;
+const iconFilename = platform === "win32" ? "lolscoreboard.ico" : "lolscoreboard.png";
 
 const createIcon = async () => {
-  const dir = pkg ? __dirname : "src";
-  const sourcePath = join(dir, iconPath);
-  const destinationIcon = join(Workspace.path, iconPath);
+  const dir = isPkg ? __dirname : "src";
+  const sourcePath = join(dir, `assets/${iconFilename}`);
+  if (!isPkg) {
+    return sourcePath;
+  }
+  const destinationIcon = Workspace.getPath("assets", iconFilename);
   await copyFile(sourcePath, destinationIcon).catch(() => null);
   return destinationIcon;
 };

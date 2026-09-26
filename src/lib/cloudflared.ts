@@ -1,16 +1,16 @@
-import { join } from "node:path";
 import { spawn } from "node:child_process";
-import { install } from "cloudflared";
+import { bin, install } from "cloudflared";
 import { consola } from "consola";
 import { Workspace } from "../utils/workspace.ts";
 import { existsSync } from "node:fs";
-import { runtime } from "../utils/app.ts";
+import { isPkg, runtime } from "../utils/app.ts";
 
 export const startCloudflared = async () => {
   consola.start("Starting Cloudflare Tunnel...");
   const isWindows = process.platform === "win32";
 
-  const cloudflaredBin = join(Workspace.path, isWindows ? "cloudflared.exe" : "cloudflared");
+  const filename = isWindows ? "cloudflared.exe" : "cloudflared";
+  const cloudflaredBin = isPkg ? Workspace.getPath("bin", filename) : bin;
   if (!existsSync(cloudflaredBin)) {
     await install(cloudflaredBin);
   }
