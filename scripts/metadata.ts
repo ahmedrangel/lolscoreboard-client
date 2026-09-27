@@ -2,7 +2,7 @@ import resedit from "resedit-cli";
 import pkg from "../package.json" with { type: "json" };
 
 const owner = "ahmedrangel";
-const path = "./pkg/lolscoreboard-client.exe";
+const path = "./pkg/riftboard-client.exe";
 const iconPath = "./src/assets/favicon.ico";
 const version = pkg.version;
 

@@ -10,7 +10,7 @@ import { toggleCmd } from "../utils/cmd.ts";
 import { Icon, Menu, NotifyIcon } from "not-the-systray";
 import { isPkg } from "../utils/app.ts";
 
-const iconFilename = platform === "win32" ? "lolscoreboard.ico" : "lolscoreboard.png";
+const iconFilename = platform === "win32" ? "riftboard.ico" : "riftboard.png";
 
 const createIcon = async () => {
   const dir = isPkg ? __dirname : "src";

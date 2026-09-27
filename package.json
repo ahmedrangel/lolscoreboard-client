@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "lolscoreboard-client",
+  "name": "riftboard-client",
   "version": "0.0.0",
   "description": "A client that exposes the League of Legends scoreboard data from current game via API and WebSocket",
   "type": "module",
@@ -22,12 +22,12 @@
       "url": "https://yizack.com"
     }
   ],
-  "homepage": "https://github.com/JimRsng/lolscoreboard-client",
+  "homepage": "https://github.com/JimRsng/riftboard-client",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JimRsng/lolscoreboard-client.git"
+    "url": "git+https://github.com/JimRsng/riftboard-client.git"
   },
-  "bugs": "https://github.com/JimRsng/lolscoreboard-client/issues",
+  "bugs": "https://github.com/JimRsng/riftboard-client/issues",
   "scripts": {
     "dev": "node src/index.ts --dev",
     "start": "node src/index.ts",

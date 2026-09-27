@@ -1,7 +1,7 @@
 import consola from "consola";
 import { runtime } from "../utils/app.ts";
 
-export const lolScoreboardSync = async () => {
+export const riftBoardSync = async () => {
   const maxTime = 10 * 60 * 1000; // 10 minutes
   const startTime = Date.now();
   while (Date.now() - startTime < maxTime) {

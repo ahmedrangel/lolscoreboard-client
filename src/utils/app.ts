@@ -31,7 +31,7 @@ export const runtime = {
   }
 };
 
-export const getAPIBaseURL = () => runtime.dev ? "http://localhost:5173/api" : "https://lolscoreboard.ahmedrangel.com/api";
+export const getAPIBaseURL = () => runtime.dev ? "http://localhost:5173/api" : "https://riftboard.ahmedrangel.com/api";
 
 export const checkForUpdates = async () => {
   const slug = `${APP.repository.owner}/${APP.repository.name}`;

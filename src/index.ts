@@ -4,7 +4,7 @@ import { APP, checkForUpdates, isPkg, runtime } from "./utils/app.ts";
 import { runHttp } from "./services/http.ts";
 import { startCloudflared } from "./lib/cloudflared.ts";
 import { twitchAuth } from "./services/twitch.ts";
-import { lolScoreboardSync } from "./services/scoreboard.ts";
+import { riftBoardSync } from "./services/riftboard.ts";
 import { runWebSocket } from "./services/ws.ts";
 import LeagueService from "./services/league.ts";
 import { Workspace } from "./utils/workspace.ts";
@@ -52,7 +52,7 @@ const main = defineCommand({
       const server = await runHttp();
       const url = args.tunnel ? await startCloudflared() : "test";
       await Promise.all([
-        lolScoreboardSync(),
+        riftBoardSync(),
         twitchAuth({ url })
       ]);
       await LeagueService.getInstance();
