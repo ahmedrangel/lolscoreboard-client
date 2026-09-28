@@ -15,8 +15,8 @@ await resedit({
     lang,
     icons: [{ id: 1, sourceFile: iconPath }],
     version: {
-      productName: `${owner} LoL Scoreboard Client`,
-      fileDescription: pkg.description,
+      productName: `${owner} | ${pkg.name}`,
+      fileDescription: pkg.name,
       fileVersion: `${version}.0`,
       productVersion: version,
       companyName: owner,
