@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.2
+
+[compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.1...v0.0.2)
+
+### 🏡 Chore
+
+- Update package metadata ([3e1c938](https://github.com/ahmedrangel/riftboard-client/commit/3e1c938))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.0.1
 
 
