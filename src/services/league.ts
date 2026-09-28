@@ -100,6 +100,7 @@ export default class LeagueService {
         game: {
           version: this.version,
           started: false,
+          startedAt: null,
           dragonSoul: null
         },
         resources: {
@@ -110,14 +111,19 @@ export default class LeagueService {
       };
     }
     await this.refreshDataDragonIfNeeded();
-    const players = await this.getPlayersData();
-    const eventsData = await IngameAPI.getEvents().catch(() => null);
+    const [players, eventsData, gameStats] = await Promise.all([
+      this.getPlayersData(),
+      IngameAPI.getEvents().catch(() => null),
+      IngameAPI.getGameStats().catch(() => null)
+    ]);
     const teams = await this.teamData(players, eventsData);
+    const startedAt = gameStats?.gameTime ? new Date(Math.floor((Date.now() - gameStats.gameTime * 1000) / 1000) * 1000).toISOString() : null;
 
     return {
       game: {
         version: this.version,
         started: players.length ? true : this.gameStarted,
+        startedAt,
         dragonSoul: eventsData?.Events?.filter(event => event.EventName === "DragonKill")?.[2]?.DragonType || null
       },
       resources: {
