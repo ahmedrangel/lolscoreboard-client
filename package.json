@@ -15,19 +15,14 @@
       "name": "Ahmed Rangel",
       "email": "ahmedrangel@outlook.com",
       "url": "https://ahmedrangel.com"
-    },
-    {
-      "name": "Yizack Rangel",
-      "email": "yizackr@gmail.com",
-      "url": "https://yizack.com"
     }
   ],
-  "homepage": "https://github.com/JimRsng/riftboard-client",
+  "homepage": "https://github.com/ahmedrangel/riftboard-client",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JimRsng/riftboard-client.git"
+    "url": "git+https://github.com/ahmedrangel/riftboard-client.git"
   },
-  "bugs": "https://github.com/JimRsng/riftboard-client/issues",
+  "bugs": "https://github.com/ahmedrangel/riftboard-client/issues",
   "scripts": {
     "dev": "node src/index.ts --dev",
     "start": "node src/index.ts",
