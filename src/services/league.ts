@@ -111,15 +111,20 @@ export default class LeagueService {
       };
     }
     await this.refreshDataDragonIfNeeded();
-    const [players, eventsData, gameStats] = await Promise.all([
+    const [players, eventsData, gameStats, account] = await Promise.all([
       this.getPlayersData(),
       IngameAPI.getEvents().catch(() => null),
-      IngameAPI.getGameStats().catch(() => null)
+      IngameAPI.getGameStats().catch(() => null),
+      this.client.request("get", "/lol-summoner/v1/current-summoner").catch(() => null)
     ]);
     const teams = await this.teamData(players, eventsData);
     const startedAt = gameStats?.gameTime ? new Date(Math.floor((Date.now() - gameStats.gameTime * 1000) / 1000) * 1000).toISOString() : null;
 
     return {
+      account: {
+        gameName: account?.gameName,
+        tagLine: account?.tagLine
+      },
       game: {
         version: this.version,
         started: players.length ? true : this.gameStarted,
