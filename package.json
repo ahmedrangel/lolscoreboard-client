@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "riftboard-client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A client that exposes the League of Legends scoreboard data from current game via API and WebSocket",
   "type": "module",
   "license": "MIT",
@@ -47,8 +47,12 @@
       "dist/assets/**/*",
       "node_modules/not-the-systray/**/*.node"
     ],
-    "targets": ["node24-win-x64"],
-    "ignore": ["**/*/node_modules/*/test/**"],
+    "targets": [
+      "node24-win-x64"
+    ],
+    "ignore": [
+      "**/*/node_modules/*/test/**"
+    ],
     "compress": "Zstd",
     "outputPath": "pkg"
   },
