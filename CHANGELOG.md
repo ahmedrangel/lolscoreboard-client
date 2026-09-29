@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- **ci:** Release workflow on Windows ([80b827e](https://github.com/ahmedrangel/riftboard-client/commit/80b827e))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.0.2
 
 [compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.1...v0.0.2)
