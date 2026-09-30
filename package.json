@@ -56,9 +56,9 @@
     "@hasagi/ingame-api": "^0.2.2",
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^26.6.3",
-    "@types/ws": "^8.18.1",
+    "@types/ws": "^8.18.2",
     "@whatwg-node/server": "^0.13.0",
-    "@yao-pkg/pkg": "^6.22.0",
+    "@yao-pkg/pkg": "^6.23.0",
     "changelogen": "^0.6.2",
     "citty": "^0.2.2",
     "cloudflared": "^0.7.3",
@@ -78,5 +78,5 @@
     "ufo": "^1.6.4",
     "ws": "^8.22.0"
   },
-  "packageManager": "pnpm@12.6.0"
+  "packageManager": "pnpm@12.8.1"
 }
