@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.3...v0.0.4)
+
+### 💅 Refactors
+
+- **cmd:** Replace PowerShell script with koffi API ([737bb73](https://github.com/ahmedrangel/riftboard-client/commit/737bb73))
+
+### ❤️ Contributors
+
+- Ahmed Rangel <ahmedrangel@outlook.com>
+
 ## v0.0.3
 
 [compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.2...v0.0.3)
