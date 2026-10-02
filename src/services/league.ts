@@ -111,14 +111,32 @@ export default class LeagueService {
       };
     }
     await this.refreshDataDragonIfNeeded();
-    const [players, eventsData, gameStats, account] = await Promise.all([
+    const [players, eventsData, gameStats, account, session] = await Promise.all([
       this.getPlayersData(),
       IngameAPI.getEvents().catch(() => null),
       IngameAPI.getGameStats().catch(() => null),
-      this.client.request("get", "/lol-summoner/v1/current-summoner").catch(() => null)
+      this.client.request("get", "/lol-summoner/v1/current-summoner").catch(() => null),
+      this.client.request("get", "/lol-gameflow/v1/session").catch(() => null)
     ]);
     const teams = await this.teamData(players, eventsData);
     const startedAt = gameStats?.gameTime ? new Date(Math.floor((Date.now() - gameStats.gameTime * 1000) / 1000) * 1000).toISOString() : null;
+
+    let dragonSoulIndex = null as number | null;
+
+    const secondDragonSoulQueues = [480, 490, 880, 890];
+    const dragonsMapId = 11;
+
+    if (session?.gameData?.queue?.id) {
+      if (secondDragonSoulQueues.includes(session?.gameData?.queue?.id)) {
+        dragonSoulIndex = 1;
+      }
+      else if (session?.gameData?.queue.mapId !== dragonsMapId) {
+        dragonSoulIndex = null;
+      }
+      else {
+        dragonSoulIndex = 2;
+      }
+    }
 
     return {
       account: {
@@ -129,7 +147,8 @@ export default class LeagueService {
         version: this.version,
         started: players.length ? true : this.gameStarted,
         startedAt,
-        dragonSoul: eventsData?.Events?.filter(event => event.EventName === "DragonKill")?.[2]?.DragonType || null
+        dragonSlots: dragonSoulIndex === 2 ? 4 : dragonSoulIndex === 1 ? 2 : 0,
+        dragonSoul: dragonSoulIndex ? eventsData?.Events?.filter(event => event.EventName === "DragonKill")?.[dragonSoulIndex]?.DragonType : null
       },
       resources: {
         cdn: this.ddragonCdn
@@ -195,9 +214,9 @@ export default class LeagueService {
         return spell.name === player.summonerSpells.summonerSpellTwo.displayName;
       });
 
-      const keystoneIcon = this.runes.flatMap(tree => tree.slots).find(slot => slot.runes.some(rune => rune.id === player.runes.keystone.id))?.runes.find(rune => rune.id === player.runes.keystone.id)?.icon;
-      const primaryRuneTreeIcon = this.runes.find(tree => tree.id === player.runes.primaryRuneTree.id)?.icon;
-      const secondaryRuneTreeIcon = this.runes.find(tree => tree.id === player.runes.secondaryRuneTree.id)?.icon;
+      const keystoneIcon = this.runes?.flatMap(tree => tree.slots)?.find(slot => slot?.runes?.some(rune => rune.id === player?.runes?.keystone?.id))?.runes?.find(rune => rune.id === player?.runes?.keystone?.id)?.icon;
+      const primaryRuneTreeIcon = this.runes?.find(tree => tree.id === player?.runes?.primaryRuneTree?.id)?.icon;
+      const secondaryRuneTreeIcon = this.runes?.find(tree => tree.id === player?.runes?.secondaryRuneTree?.id)?.icon;
 
       return {
         champion: {
@@ -235,15 +254,15 @@ export default class LeagueService {
         },
         runes: {
           keystone: {
-            displayName: player.runes.keystone.displayName,
+            displayName: player.runes?.keystone?.displayName,
             iconURL: keystoneIcon ? keystoneIcon : ""
           },
           primaryRuneTree: {
-            displayName: player.runes.primaryRuneTree.displayName,
+            displayName: player.runes?.primaryRuneTree?.displayName,
             iconURL: primaryRuneTreeIcon ? primaryRuneTreeIcon : ""
           },
           secondaryRuneTree: {
-            displayName: player.runes.secondaryRuneTree.displayName,
+            displayName: player.runes?.secondaryRuneTree?.displayName,
             iconURL: secondaryRuneTreeIcon ? secondaryRuneTreeIcon : ""
           }
         }
