@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.4...v0.0.5)
+
+### 🩹 Fixes
+
+- **league:** Adjust dragon soul and rune safety ([7417804](https://github.com/ahmedrangel/riftboard-client/commit/7417804))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.0.4
 
 [compare changes](https://github.com/ahmedrangel/riftboard-client/compare/v0.0.3...v0.0.4)
